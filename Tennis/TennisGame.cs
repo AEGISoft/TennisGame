@@ -26,8 +26,8 @@ namespace Tennis
         public string GetScore()
         {
             if (ScoresAreEqual())           return EqualScore();
-            else if (APlayerHasWon())       return AdvantageOrWinningScore();
-            else if (APlayerHasAdvantage()) return AdvantageOrWinningScore();
+            else if (APlayerHasWon())       return WinningScore();
+            else if (APlayerHasAdvantage()) return AdvantageScore();
             else                            return MidRallyScore();
         }
 
@@ -55,15 +55,18 @@ namespace Tennis
             return tempscore;
         }
 
-        private string AdvantageOrWinningScore()
+        private string AdvantageScore()
         {
-            string score;
-            int minRes = _player1.Score - _player2.Score;
-            if (minRes == 1) score = "Advantage Player 1";
-            else if (minRes == -1) score = "Advantage Player 2";
-            else if (minRes >= 2) score = "Win for Player 1";
-            else score = "Win for Player 2";
-            return score;
+            if (_player1.HasAdvantageOver(_player2))
+                 return "Advantage Player 1";
+            else return "Advantage Player 2";
+        }
+
+        private string WinningScore()
+        {
+            if (_player1.HasWonFrom(_player2))
+                 return "Win for Player 1";
+            else return "Win for Player 2";
         }
 
         private string EqualScore()
