@@ -30,6 +30,16 @@ namespace Tennis
         {
             return this.Score >= 4;
         }
+
+        internal bool HasWonFrom(Player player2)
+        {
+            return this.Score >= 4 & Score > player2.Score+1;
+        }
+
+        internal bool HasAdvantageOver(Player player2)
+        {
+            return this.Score >= 4 & Score == player2.Score+1 ;
+        }
         #endregion
     }
 }

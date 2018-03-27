@@ -30,7 +30,11 @@ namespace Tennis
             {
                 score = EqualScore();
             }
-            else if (_player1.HasAdvantageOrWinsOver(_player2) || _player2.HasAdvantageOrWinsOver(_player1))
+            else if (_player1.HasWonFrom(_player2) || _player2.HasWonFrom(_player1))
+            {
+                score = AdvantageOrWinningScore();
+            }
+            else if (_player1.HasAdvantageOver(_player2) || _player2.HasAdvantageOver(_player1))
             {
                 score = AdvantageOrWinningScore();
             }
