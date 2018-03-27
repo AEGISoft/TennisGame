@@ -39,22 +39,26 @@ namespace Tennis
         private string MidRallyScore()
         {
             string tempscore = "";
-            int s = 0;
+            int gamePoints = 0;
             for (int i = 1; i < 3; i++)
             {
-                if (i == 1) s = _player1.Score;
-                else { tempscore += "-"; s = _player2.Score; }
-                string translatedScore="";
-                switch (s)
-                {
-                    case 0: translatedScore = "Love"; break;
-                    case 1: translatedScore = "Fifteen"; break;
-                    case 2: translatedScore = "Thirty"; break;
-                    case 3: translatedScore = "Forty"; break;
-                }
-                tempscore += translatedScore;
+                if (i == 1) gamePoints = _player1.Score;
+                else { tempscore += "-"; gamePoints = _player2.Score; }
+                tempscore += TranslateScoreFrom(gamePoints);
             }
             return tempscore;
+        }
+
+        private static string TranslateScoreFrom(int gamePoints)
+        {
+            switch (gamePoints)
+            {
+                case 0: return "Love"; 
+                case 1: return "Fifteen"; 
+                case 2: return "Thirty"; 
+                case 3: return "Forty";
+                default: return "";
+            }
         }
 
         private string AdvantageScore()
