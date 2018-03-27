@@ -1,67 +1,92 @@
-﻿
+﻿using System;
+
 namespace Tennis
 {
     public class TennisGame
     {
-        private int _score1 = 0;
-        private int _score2 = 0;
-
-        private string _player1Name = "";
-        private string _player2Name = "";
-
-        public TennisGame(string player1Name, string player2Name)
+        #region construction
+        readonly private Player player1;
+        readonly private Player player2;
+        public TennisGame(Player player1, Player player2)
         {
-            _player1Name = player1Name;
-            _player2Name = player2Name;
+            this.player1 = player1;
+            this.player2 = player2;
         }
+        #endregion
 
-        public void WonPoint(string playerName)
+        #region published interface
+        public void RallyWonBy(Player player)
         {
-            if (playerName == "player1")
-                _score1++;
-            else
-                _score2++;
+            player.ScoredPointByWinningRally();
         }
 
         public string GetScore()
         {
-            string score = "";
-            int s = 0;
-            if (_score1 == _score2)
-            {
-                switch (_score1)
-                {
-                    case 0: score = "Love-All"; break;
-                    case 1: score = "Fifteen-All"; break;
-                    case 2: score = "Thirty-All"; break;
-                    case 3: score = "Forty-All"; break;
-                    default: score = "Deuce"; break;
-                }
-            }
-            else if (_score1 >= 4 || _score2 >= 4)
-            {
-                int minRes = _score1 - _score2;
-                if (minRes == 1) score = "Advantage Player 1";
-                else if (minRes == -1) score = "Advantage Player 2";
-                else if (minRes >= 2) score = "Win for Player 1";
-                else score = "Win for Player 2";
-            }
-            else
-            {
-                for (int i = 1; i < 3; i++)
-                {
-                    if (i == 1) s = _score1;
-                    else { score += "-";s = _score2; }
-                    switch (s)
-                    {
-                        case 0: score += "Love";break;
-                        case 1: score += "Fifteen";break;
-                        case 2: score += "Thirty";break;
-                        case 3: score += "Forty";break;
-                    }
-                }
-            }
-            return score;
+            if (APlayerHasWon()) return WinningScore(); 
+            else if (ScoresAreEqual()) return EqualScore();
+            else if (APlayerHasAdvantage()) return AdvantageScore();
+            else return MidRallyScore();
         }
+        #endregion
+
+        #region private parts
+        private bool APlayerHasWon()
+        {
+            return this.player1.HasWonOver(this.player2) 
+                || this.player2.HasWonOver(this.player1);
+        }
+
+        private bool APlayerHasAdvantage()
+        {
+            return this.player1.HasAdvantageOver(this.player2)
+                || this.player2.HasAdvantageOver(this.player1);
+        }
+
+        private bool ScoresAreEqual()
+        {
+            return this.player1.NrOfRaliesWon == this.player2.NrOfRaliesWon;
+        }
+
+        private string MidRallyScore()
+        {
+            return TransformToScore(this.player1.NrOfRaliesWon) + "-" + TransformToScore(this.player2.NrOfRaliesWon);
+        }
+
+        private static string TransformToScore(int ralliesWon)
+        {
+            string scorepart = "";
+            switch (ralliesWon)
+            {
+                case 0: scorepart = "Love"; break;
+                case 1: scorepart = "Fifteen"; break;
+                case 2: scorepart = "Thirty"; break;
+                case 3: scorepart = "Forty"; break;
+            }
+
+            return scorepart;
+        }
+
+        private string AdvantageScore()
+        {
+            if (player1.HasAdvantageOver(player2))
+                 return "Advantage Player 1";
+            else return "Advantage Player 2";
+        }
+
+        private string WinningScore()
+        {
+            if (player1.HasWonOver(player2))
+                 return "Win for Player 1";
+            else return "Win for Player 2";
+        }
+
+        private string EqualScore()
+        {
+            if (this.player1.NrOfRaliesWon > 3)
+                return "Deuce";
+            else
+                return TransformToScore(player1.NrOfRaliesWon) + "-All";
+        }
+        #endregion
     }
 }
