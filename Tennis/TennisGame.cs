@@ -69,17 +69,9 @@ namespace Tennis
 
         private string EqualScore()
         {
-            string score;
-            switch (_player1.GamePoints)
-            {
-                case 0: score = "Love-All"; break;
-                case 1: score = "Fifteen-All"; break;
-                case 2: score = "Thirty-All"; break;
-                case 3: score = "Forty-All"; break;
-                default: score = "Deuce"; break;
-            }
-
-            return score;
+            if (_player1.GamePoints > 3)
+                 return "Deuce";
+            else return TranslateScoreFrom(_player1.GamePoints) + "-All";
         }
         #endregion
     }
