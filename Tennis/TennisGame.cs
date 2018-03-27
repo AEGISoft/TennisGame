@@ -25,25 +25,16 @@ namespace Tennis
 
         public string GetScore()
         {
-            string score = "";
-            if (_player1.ScoreIsEqualTo(_player2))
-            {
-                score = EqualScore();
-            }
-            else if (_player1.HasWonFrom(_player2) || _player2.HasWonFrom(_player1))
-            {
-                score = AdvantageOrWinningScore();
-            }
-            else if (_player1.HasAdvantageOver(_player2) || _player2.HasAdvantageOver(_player1))
-            {
-                score = AdvantageOrWinningScore();
-            }
-            else
-            {
-                score = MidRallyScore();
-            }
-            return score;
+            if (ScoresAreEqual())           return EqualScore();
+            else if (APlayerHasWon())       return AdvantageOrWinningScore();
+            else if (APlayerHasAdvantage()) return AdvantageOrWinningScore();
+            else                            return MidRallyScore();
         }
+
+        #region private Parts
+        private bool ScoresAreEqual()       { return _player1.ScoreIsEqualTo(_player2); }
+        private bool APlayerHasWon()        { return _player1.HasWonFrom(_player2) || _player2.HasWonFrom(_player1); }
+        private bool APlayerHasAdvantage()  { return _player1.HasAdvantageOver(_player2) || _player2.HasAdvantageOver(_player1); }
 
         private string MidRallyScore()
         {
@@ -89,5 +80,6 @@ namespace Tennis
 
             return score;
         }
+        #endregion
     }
 }
