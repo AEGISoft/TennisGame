@@ -42,14 +42,18 @@ namespace Tennis.Test
         [InlineData(14, 16, "Win for Player 2")]
         public void TestScores(int score1, int score2, string score)
         {
-            TennisGame game = new TennisGame("player1", "player2");
+            var player1 = new Player("player1");
+            var player2 = new Player("player2");
+
+            TennisGame game = new TennisGame(player1, player2);
             int highestScore = Math.Max(score1, score2);
+
             for (int i = 0; i < highestScore; i++)
             {
                 if (i < score1)
-                    game.WonPoint("player1");
+                    game.WonPoint(player1);
                 if (i < score2)
-                    game.WonPoint("player2");
+                    game.WonPoint(player2);
             }
 
             Assert.Equal(game.GetScore(), score);
