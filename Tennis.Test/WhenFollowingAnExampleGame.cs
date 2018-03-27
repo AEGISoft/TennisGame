@@ -11,10 +11,10 @@ namespace Tennis.Test
             string[] points = { "player1", "player1", "player2", "player2", "player1", "player1" };
             string[] expected_scores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for Player 1" };
 
-            for (int i = 0; i < points.Length; i++)
+            for (int rally = 0; rally < points.Length; rally++)
             {
-                game.WonPoint(points[i]);
-                Assert.Equal(expected_scores[i], game.GetScore());
+                game.WonPoint(points[rally]);
+                Assert.Equal(expected_scores[rally], game.GetScore());
             }
         }
     }
