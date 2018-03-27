@@ -1,11 +1,7 @@
-﻿
-using System;
-
-namespace Tennis
+﻿namespace Tennis
 {
     public class TennisGame
     {
-
         private Player _player1;
         private Player _player2;
 

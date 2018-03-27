@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tennis
+﻿namespace Tennis
 {
     internal class Player
     {
@@ -13,10 +11,10 @@ namespace Tennis
         }
         #endregion
 
-        #region published interface
-        public int GamePoints { get; private set; }
+        #region internal interface
+        internal int GamePoints { get; private set; }
 
-        public void ScoredPointByWinningRally()
+        internal void ScoredPointByWinningRally()
         {
             GamePoints++;
         }
