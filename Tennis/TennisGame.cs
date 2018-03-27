@@ -26,11 +26,11 @@ namespace Tennis
         public string GetScore()
         {
             string score = "";
-            if (_player1.Score == _player2.Score)
+            if (_player1.ScoreIsEqualTo(_player2))
             {
                 score = EqualScore();
             }
-            else if (_player1.Score >= 4 || _player2.Score >= 4)
+            else if (_player1.HasAdvantageOrWinsOver(_player2) || _player2.HasAdvantageOrWinsOver(_player1))
             {
                 score = AdvantageOrWinningScore();
             }

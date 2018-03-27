@@ -1,4 +1,6 @@
-﻿namespace Tennis
+﻿using System;
+
+namespace Tennis
 {
     internal class Player
     {
@@ -17,6 +19,16 @@
         public void ScoredPointByWinningRally()
         {
             Score++;
+        }
+
+        internal bool ScoreIsEqualTo(Player player2)
+        {
+            return this.Score == player2.Score;
+        }
+
+        internal bool HasAdvantageOrWinsOver(Player player2)
+        {
+            return this.Score >= 4;
         }
         #endregion
     }
