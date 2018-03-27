@@ -29,22 +29,11 @@ namespace Tennis
             int s = 0;
             if (_score1 == _score2)
             {
-                switch (_score1)
-                {
-                    case 0: score = "Love-All"; break;
-                    case 1: score = "Fifteen-All"; break;
-                    case 2: score = "Thirty-All"; break;
-                    case 3: score = "Forty-All"; break;
-                    default: score = "Deuce"; break;
-                }
+                score = EqualScore();
             }
             else if (_score1 >= 4 || _score2 >= 4)
             {
-                int minRes = _score1 - _score2;
-                if (minRes == 1) score = "Advantage Player 1";
-                else if (minRes == -1) score = "Advantage Player 2";
-                else if (minRes >= 2) score = "Win for Player 1";
-                else score = "Win for Player 2";
+                score = AdvantageOrWinningScore();
             }
             else
             {
@@ -61,6 +50,32 @@ namespace Tennis
                     }
                 }
             }
+            return score;
+        }
+
+        private string AdvantageOrWinningScore()
+        {
+            string score;
+            int minRes = _score1 - _score2;
+            if (minRes == 1) score = "Advantage Player 1";
+            else if (minRes == -1) score = "Advantage Player 2";
+            else if (minRes >= 2) score = "Win for Player 1";
+            else score = "Win for Player 2";
+            return score;
+        }
+
+        private string EqualScore()
+        {
+            string score;
+            switch (_score1)
+            {
+                case 0: score = "Love-All"; break;
+                case 1: score = "Fifteen-All"; break;
+                case 2: score = "Thirty-All"; break;
+                case 3: score = "Forty-All"; break;
+                default: score = "Deuce"; break;
+            }
+
             return score;
         }
     }
