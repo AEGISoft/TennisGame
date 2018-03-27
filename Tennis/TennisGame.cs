@@ -36,19 +36,21 @@ namespace Tennis
             }
             else
             {
+                string tempscore = "";
                 int s = 0;
                 for (int i = 1; i < 3; i++)
                 {
                     if (i == 1) s = _score1;
-                    else { score += "-";s = _score2; }
+                    else { tempscore += "-";s = _score2; }
                     switch (s)
                     {
-                        case 0: score += "Love";break;
-                        case 1: score += "Fifteen";break;
-                        case 2: score += "Thirty";break;
-                        case 3: score += "Forty";break;
+                        case 0: tempscore += "Love";break;
+                        case 1: tempscore += "Fifteen";break;
+                        case 2: tempscore += "Thirty";break;
+                        case 3: tempscore += "Forty";break;
                     }
                 }
+                score = tempscore;
             }
             return score;
         }
