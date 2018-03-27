@@ -44,13 +44,15 @@ namespace Tennis
             {
                 if (i == 1) s = _player1.Score;
                 else { tempscore += "-"; s = _player2.Score; }
+                string translatedScore="";
                 switch (s)
                 {
-                    case 0: tempscore += "Love"; break;
-                    case 1: tempscore += "Fifteen"; break;
-                    case 2: tempscore += "Thirty"; break;
-                    case 3: tempscore += "Forty"; break;
+                    case 0: translatedScore = "Love"; break;
+                    case 1: translatedScore = "Fifteen"; break;
+                    case 2: translatedScore = "Thirty"; break;
+                    case 3: translatedScore = "Forty"; break;
                 }
+                tempscore += translatedScore;
             }
             return tempscore;
         }
