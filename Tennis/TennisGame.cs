@@ -36,23 +36,28 @@ namespace Tennis
             }
             else
             {
-                string tempscore = "";
-                int s = 0;
-                for (int i = 1; i < 3; i++)
-                {
-                    if (i == 1) s = _score1;
-                    else { tempscore += "-";s = _score2; }
-                    switch (s)
-                    {
-                        case 0: tempscore += "Love";break;
-                        case 1: tempscore += "Fifteen";break;
-                        case 2: tempscore += "Thirty";break;
-                        case 3: tempscore += "Forty";break;
-                    }
-                }
-                score = tempscore;
+                score = MidRallyScore();
             }
             return score;
+        }
+
+        private string MidRallyScore()
+        {
+            string tempscore = "";
+            int s = 0;
+            for (int i = 1; i < 3; i++)
+            {
+                if (i == 1) s = _score1;
+                else { tempscore += "-"; s = _score2; }
+                switch (s)
+                {
+                    case 0: tempscore += "Love"; break;
+                    case 1: tempscore += "Fifteen"; break;
+                    case 2: tempscore += "Thirty"; break;
+                    case 3: tempscore += "Forty"; break;
+                }
+            }
+            return tempscore;
         }
 
         private string AdvantageOrWinningScore()
