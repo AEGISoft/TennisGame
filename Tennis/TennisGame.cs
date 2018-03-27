@@ -2,6 +2,7 @@
 {
     public class TennisGame
     {
+        #region construction
         private Player _player1;
         private Player _player2;
 
@@ -11,6 +12,14 @@
             _player2 = new Player(player2Name);
         }
 
+        public TennisGame(Player player1, Player player2)
+        {
+            _player1 = player1;
+            _player2 = player2;
+        }
+        #endregion
+
+        #region published interface
         public void WonPoint(string playerName)
         {
             if (playerName == _player1.Name)
@@ -26,6 +35,7 @@
             else if (APlayerHasAdvantage()) return AdvantageScore();
             else                            return MidRallyScore();
         }
+        #endregion
 
         #region private Parts
         private bool ScoresAreEqual()       { return _player1.ScoreIsEqualTo(_player2); }

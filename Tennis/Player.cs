@@ -1,6 +1,6 @@
 ﻿namespace Tennis
 {
-    internal class Player
+    public class Player
     {
         #region construction
         public string Name { get; }

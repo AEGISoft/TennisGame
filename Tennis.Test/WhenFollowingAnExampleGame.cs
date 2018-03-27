@@ -7,15 +7,36 @@ namespace Tennis.Test
         [Fact]
         public void TheGameScoreShouldReflectTheScoresOfEachRally()
         {
-            TennisGame game = new TennisGame("player1", "player2");
-            string[] points = { "player1", "player1", "player2", "player2", "player1", "player1" };
-            string[] expected_scores = { "Fifteen-Love", "Thirty-Love", "Thirty-Fifteen", "Thirty-All", "Forty-Thirty", "Win for Player 1" };
+            var player1 = new Player("player1");
+            var player2 = new Player("player2");
+            TennisGame game = new TennisGame(player1, player2);
 
-            for (int rally = 0; rally < points.Length; rally++)
+            Rally[] rallies = {
+                new Rally(player1, "Fifteen-Love"),
+                new Rally(player1, "Thirty-Love"),
+                new Rally(player2, "Thirty-Fifteen"),
+                new Rally(player2, "Thirty-All"),
+                new Rally(player1, "Forty-Thirty"),
+                new Rally(player1, "Win for Player 1")
+            };
+
+            for (int rally = 0; rally < rallies.Length; rally++)
             {
-                game.WonPoint(points[rally]);
-                Assert.Equal(expected_scores[rally], game.GetScore());
+                game.WonPoint(rallies[rally].WonByPlayer.Name);
+                Assert.Equal(rallies[rally].ExpectedScore, game.GetScore());
             }
+        }
+
+        private class Rally
+        {
+            public Rally(Player scoringPlayer, string expectedScore)
+            {
+                WonByPlayer = scoringPlayer;
+                ExpectedScore = expectedScore;
+            }
+
+            public Player WonByPlayer { get; internal set; }
+            public string ExpectedScore { get; internal set; }
         }
     }
 }
