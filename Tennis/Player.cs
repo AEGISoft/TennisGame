@@ -9,36 +9,36 @@ namespace Tennis
         public Player(string playerName)
         {
             this.Name = playerName;
-            this.Score = 0;
+            this.GamePoints = 0;
         }
         #endregion
 
         #region published interface
-        public int Score { get; private set; }
+        public int GamePoints { get; private set; }
 
         public void ScoredPointByWinningRally()
         {
-            Score++;
+            GamePoints++;
         }
 
         internal bool ScoreIsEqualTo(Player player2)
         {
-            return this.Score == player2.Score;
+            return this.GamePoints == player2.GamePoints;
         }
 
         internal bool HasAdvantageOrWinsOver(Player player2)
         {
-            return this.Score >= 4;
+            return this.GamePoints >= 4;
         }
 
         internal bool HasWonFrom(Player player2)
         {
-            return this.Score >= 4 & Score > player2.Score+1;
+            return this.GamePoints >= 4 & GamePoints > player2.GamePoints+1;
         }
 
         internal bool HasAdvantageOver(Player player2)
         {
-            return this.Score >= 4 & Score == player2.Score+1 ;
+            return this.GamePoints >= 4 & GamePoints == player2.GamePoints+1 ;
         }
         #endregion
     }

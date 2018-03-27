@@ -38,7 +38,7 @@ namespace Tennis
 
         private string MidRallyScore()
         {
-            return TranslateScoreFrom(_player1.Score) + "-" + TranslateScoreFrom(_player2.Score);
+            return TranslateScoreFrom(_player1.GamePoints) + "-" + TranslateScoreFrom(_player2.GamePoints);
         }
 
         private static string TranslateScoreFrom(int gamePoints)
@@ -70,7 +70,7 @@ namespace Tennis
         private string EqualScore()
         {
             string score;
-            switch (_player1.Score)
+            switch (_player1.GamePoints)
             {
                 case 0: score = "Love-All"; break;
                 case 1: score = "Fifteen-All"; break;
