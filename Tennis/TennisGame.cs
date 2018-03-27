@@ -26,7 +26,6 @@ namespace Tennis
         public string GetScore()
         {
             string score = "";
-            int s = 0;
             if (_score1 == _score2)
             {
                 score = EqualScore();
@@ -37,6 +36,7 @@ namespace Tennis
             }
             else
             {
+                int s = 0;
                 for (int i = 1; i < 3; i++)
                 {
                     if (i == 1) s = _score1;
