@@ -2,7 +2,7 @@
 
 namespace Tennis.Test
 {
-    public class WhenFollowingAnExampleGame
+    public partial class WhenFollowingAnExampleGame
     {
         [Fact]
         public void TheGameScoreShouldReflectTheScoresOfEachRally()
@@ -22,21 +22,9 @@ namespace Tennis.Test
 
             for (int rally = 0; rally < rallies.Length; rally++)
             {
-                game.WonPoint(rallies[rally].WonByPlayer.Name);
+                game.WonPoint(rallies[rally].WonByPlayer);
                 Assert.Equal(rallies[rally].ExpectedScore, game.GetScore());
             }
-        }
-
-        private class Rally
-        {
-            public Rally(Player scoringPlayer, string expectedScore)
-            {
-                WonByPlayer = scoringPlayer;
-                ExpectedScore = expectedScore;
-            }
-
-            public Player WonByPlayer { get; internal set; }
-            public string ExpectedScore { get; internal set; }
         }
     }
 }

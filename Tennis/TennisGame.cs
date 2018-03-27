@@ -1,4 +1,6 @@
-﻿namespace Tennis
+﻿using System;
+
+namespace Tennis
 {
     public class TennisGame
     {
@@ -20,6 +22,11 @@
         #endregion
 
         #region published interface
+        public void WonPoint(Player player)
+        {
+            player.ScoredPointByWinningRally();
+        }
+        [Obsolete("use variant with Player object as parameter")]
         public void WonPoint(string playerName)
         {
             if (playerName == _player1.Name)
