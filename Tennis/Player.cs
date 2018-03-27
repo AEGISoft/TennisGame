@@ -24,19 +24,16 @@
             return this.GamePoints == player2.GamePoints;
         }
 
-        internal bool HasAdvantageOrWinsOver(Player player2)
-        {
-            return this.GamePoints >= 4;
-        }
-
         internal bool HasWonFrom(Player player2)
         {
-            return this.GamePoints >= 4 & GamePoints > player2.GamePoints+1;
+            return this.GamePoints >= 4 
+                 & this.GamePoints > player2.GamePoints+1;
         }
 
         internal bool HasAdvantageOver(Player player2)
         {
-            return this.GamePoints >= 4 & GamePoints == player2.GamePoints+1 ;
+            return this.GamePoints >= 4 
+                 & this.GamePoints == player2.GamePoints+1 ;
         }
         #endregion
     }
