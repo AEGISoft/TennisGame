@@ -1,36 +1,56 @@
 ﻿
+using System;
+
 namespace Tennis
 {
+    internal class Player
+    {
+        #region construction
+        public string Name { get; }
+        public Player(string playerName)
+        {
+            this.Name = playerName;
+            this.Score = 0;
+        }
+        #endregion
+
+        #region published interface
+        public int Score { get; private set; }
+
+        public void ScoredPointByWinningRally()
+        {
+            Score++;
+        }
+        #endregion
+    }
     public class TennisGame
     {
-        private int _score1 = 0;
-        private int _score2 = 0;
 
-        private string _player1Name = "";
-        private string _player2Name = "";
+        private Player _player1;
+        private Player _player2;
 
         public TennisGame(string player1Name, string player2Name)
         {
-            _player1Name = player1Name;
-            _player2Name = player2Name;
+            _player1 = new Player(player1Name);
+            _player2 = new Player(player2Name);
         }
 
         public void WonPoint(string playerName)
         {
-            if (playerName == "player1")
-                _score1++;
+            if (playerName == _player1.Name)
+                _player1.ScoredPointByWinningRally();
             else
-                _score2++;
+                _player2.ScoredPointByWinningRally();
         }
 
         public string GetScore()
         {
             string score = "";
-            if (_score1 == _score2)
+            if (_player1.Score == _player2.Score)
             {
                 score = EqualScore();
             }
-            else if (_score1 >= 4 || _score2 >= 4)
+            else if (_player1.Score >= 4 || _player2.Score >= 4)
             {
                 score = AdvantageOrWinningScore();
             }
@@ -47,8 +67,8 @@ namespace Tennis
             int s = 0;
             for (int i = 1; i < 3; i++)
             {
-                if (i == 1) s = _score1;
-                else { tempscore += "-"; s = _score2; }
+                if (i == 1) s = _player1.Score;
+                else { tempscore += "-"; s = _player2.Score; }
                 switch (s)
                 {
                     case 0: tempscore += "Love"; break;
@@ -63,7 +83,7 @@ namespace Tennis
         private string AdvantageOrWinningScore()
         {
             string score;
-            int minRes = _score1 - _score2;
+            int minRes = _player1.Score - _player2.Score;
             if (minRes == 1) score = "Advantage Player 1";
             else if (minRes == -1) score = "Advantage Player 2";
             else if (minRes >= 2) score = "Win for Player 1";
@@ -74,7 +94,7 @@ namespace Tennis
         private string EqualScore()
         {
             string score;
-            switch (_score1)
+            switch (_player1.Score)
             {
                 case 0: score = "Love-All"; break;
                 case 1: score = "Fifteen-All"; break;
